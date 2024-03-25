@@ -2,35 +2,20 @@ import React, { useReducer } from "react";
 
 import MinusIcon from "./../assets/icon-minus.svg";
 import PlusIcon from "./../assets/icon-plus.svg";
-
-const initialState = {
-  product: {
-    price: 250.0,
-    quantity: 0,
-    discount: 50,
-  },
-  cart : []
-};
-
-const productReducer = ({product, cart}, action) => {
-  switch(action.type){
-    case "INCREASE_QUANTITY" : 
-      return {product: { ...product, quantity: product.quantity++}, cart : [...cart] }
-    default:
-      return state;
-  }
-}
-
+import { CustomProductContext } from "../context/ProductContext";
 
 const ProductDescription = () => {
-  const [ {product, cart}, dispatch ] = useReducer(productReducer, initialState);
+  const { product, dispatch } = CustomProductContext();
 
-  const discount = (percent) =>{
-      return (product.price/100) * product.discount;
-  }
+  const discount = () => {
+    return (product.price / 100) * product.discount;
+  };
 
   const discountPrice = discount(50);
-
+  const total = () => {
+    return discountPrice * product.quantity;
+  };
+  const totalPrice = total();
   return (
     <div className='mobile:w-full mobile:mt-0 w-[500px] p-5 pb-5 mt-16'>
       <h3 className=' uppercase text-orange font-extrabold'>sneaker company</h3>
@@ -44,7 +29,9 @@ const ProductDescription = () => {
       </p>
       <div className='mobile:flex justify-between items-center'>
         <div className='flex'>
-          <h3 className=' mobile:text-3xl text-2xl font-bold mr-5'>${discountPrice}</h3>
+          <h3 className=' mobile:text-3xl text-2xl font-bold mr-5'>
+            ${discountPrice}
+          </h3>
           <div className=' flex justify-center items-center bg-paleOrange text-orange rounded px-2'>
             <span className=' font-bold'>{product.discount}%</span>
           </div>
@@ -55,15 +42,30 @@ const ProductDescription = () => {
       </div>
       <div className='flex mobile:flex-col mt-10 '>
         <div className=' mobile:w-full mobile:p-5 mobile:rounded-xl mobile:mb-2 flex justify-between mr-5 px-3 py-5 w-1/3 bg-lightGrayishBlue rounded-lg'>
-          <button>
+          <button onClick={() => dispatch({ type: "DECREASE_QUANTITY" })}>
             <img src={MinusIcon} alt='' />
           </button>
           <p className='font-bold'>{product.quantity}</p>
-          <button onClick={()=> dispatch({type: "INCREASE_QUANTITY"})}>
+          <button onClick={() => dispatch({ type: "INCREASE_QUANTITY" })}>
             <img src={PlusIcon} alt='' />
           </button>
         </div>
-        <button className='mobile:w-full mobile:rounded-xl mobile:p-5 mobile:text-xl flex justify-center items-center py-5 bg-orange hover:bg-paleOrange text-white font-bold rounded-lg w-2/3'>
+        <button
+          className='mobile:w-full mobile:rounded-xl mobile:p-5 mobile:text-xl flex justify-center items-center py-5 bg-orange hover:bg-paleOrange text-white font-bold rounded-lg w-2/3'
+          onClick={() => {
+            dispatch({
+              type: "ADD_TO_CART",
+              product: {
+                id: Math.floor(Math.random() * 1000),
+                title: "Fall Limited Edition Sneakers",
+                discountPrice,
+                quantity: product.quantity,
+                totalPrice,
+              },
+            });
+          }}
+          disabled={product.quantity < 1 ? true : false}
+        >
           {/* cart icon */}
           <svg
             className=' mr-5'
