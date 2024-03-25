@@ -1,10 +1,11 @@
 import React from "react";
 
-const TransparentScreen = ({isOpen}) => {
-
-    const display = isOpen ? "block" : "hidden";
+const TransparentScreen = ({ isOpen }) => {
+  const display = isOpen ? "block" : "hidden";
   return (
-    <div className={`${display} bg-lightBg bg-opacity-75 fixed top-0 left-0 right-0 h-screen w-screen delay-500  z-10 `}></div>
+    <div
+      className={`${display} delay-700 bg-lightBg bg-opacity-75 fixed top-0 left-0 right-0 h-screen w-screen z-10`}
+    ></div>
   );
 };
 
