@@ -51,11 +51,8 @@ const NavBar = () => {
           </li>
         </ul>
 
-        <div
-          className='flex items-center'
-          onClick={() => setIsCartOpen(!isCartOpen)}
-        >
-          <div className='relative'>
+        <div className='flex items-center'>
+          <div className='relative' onClick={() => setIsCartOpen(!isCartOpen)}>
             <img src={CartIcon} className='mobile:pr-5 pr-10 cursor-pointer' />
 
             <div
