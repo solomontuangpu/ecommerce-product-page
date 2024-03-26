@@ -4,12 +4,7 @@ import Thumbnail from "./Thumbnail";
 import NextIcon from "./../assets/icon-next.svg";
 import PreviousIcon from "./../assets/icon-previous.svg";
 
-import Image1 from "/images/image-product-1.jpg";
-import Image2 from "/images/image-product-2.jpg";
-import Image3 from "/images/image-product-3.jpg";
-import Image4 from "/images/image-product-4.jpg";
-
-const mainImage = [Image1, Image2, Image3, Image4];
+import { mainImage } from "../assets/data/imageData";
 
 export default function ProductImage() {
   const [imageIndex, setImageIndex] = useState(0);

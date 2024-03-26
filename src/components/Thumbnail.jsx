@@ -1,11 +1,5 @@
 import React, { useRef, useState } from "react";
-
-import Thumbnail1 from "/images/image-product-1-thumbnail.jpg";
-import Thumbnail2 from "/images/image-product-2-thumbnail.jpg";
-import Thumbnail3 from "/images/image-product-3-thumbnail.jpg";
-import Thumbnail4 from "/images/image-product-4-thumbnail.jpg";
-
-const thumbnails = [Thumbnail1, Thumbnail2, Thumbnail3, Thumbnail4];
+import { thumbnails } from "../assets/data/imageData";
 
 const Thumbnail = ({ handleChange }) => {
   const [focusedIndex, setFocusedIndex] = useState(null);

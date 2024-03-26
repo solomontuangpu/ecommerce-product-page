@@ -35,6 +35,13 @@ const productReducer = ({ product, cart }, action) => {
         product: {...product},
         cart : [...cart, action.product]
       };
+    case "REMOVE_FROM_CART":
+      const filterCart = cart.filter(product => product.id !== action.id);
+
+      return {
+        product: { ...product },
+        cart: [...filterCart]
+      };
     default:
       return state;
   }

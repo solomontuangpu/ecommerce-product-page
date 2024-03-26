@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React from "react";
 
 import MinusIcon from "./../assets/icon-minus.svg";
 import PlusIcon from "./../assets/icon-plus.svg";
@@ -61,6 +61,7 @@ const ProductDescription = () => {
                 discountPrice,
                 quantity: product.quantity,
                 totalPrice,
+                imageIndex : 0
               },
             });
           }}

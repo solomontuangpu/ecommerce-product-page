@@ -7,8 +7,11 @@ import MenuIcon from "./../assets/icon-menu.svg";
 import MobileNav from "./MobileNav";
 import TransparentScreen from "./TransparentScreen";
 import Cart from "./Cart";
+import { CustomProductContext } from "../context/ProductContext";
 
 const NavBar = () => {
+  const { cart } = CustomProductContext();
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -48,8 +51,21 @@ const NavBar = () => {
           </li>
         </ul>
 
-        <div className='flex items-center'>
-          <img src={CartIcon} className='mobile:pr-5 pr-10 cursor-pointer' onClick={()=> setIsCartOpen(!isCartOpen)}/>
+        <div
+          className='flex items-center'
+          onClick={() => setIsCartOpen(!isCartOpen)}
+        >
+          <div className='relative'>
+            <img src={CartIcon} className='mobile:pr-5 pr-10 cursor-pointer' />
+
+            <div
+              className={`${
+                cart.length < 1 ? "hidden" : ""
+              } flex justify-center items-center p-1 w-8 h-6 rounded-full bg-orange absolute top-2 left-3`}
+            >
+              <p className=' text-white font-bold'>{cart.length}</p>
+            </div>
+          </div>
           <div>
             <img
               src={UserIcon}
