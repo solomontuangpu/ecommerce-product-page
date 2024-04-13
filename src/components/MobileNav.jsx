@@ -9,7 +9,7 @@ const MobileNav = ({ isOpen, handleMenuClick }) => {
   return (
     <aside
       className={`hidden mobile:block 
-      p-5 border-r-2 bg-white w-2/3 absolute h-screen top-0 z-50 ${position}`}
+      p-5 border-r-2 bg-white w-2/3 absolute h-screen top-0 z-50 duration-700 ${position}`}
     >
       <img src={CloseIcon} className='pb-10' onClick={handleMenuClick} />
       <ul className='py-5 text-2xl font-bold flex flex-col justify-between h-[300px]'>
